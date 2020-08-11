@@ -60,6 +60,10 @@ const insulteArray = [
 	"suce ma queue",
 	"fiote",
 	"fiotes",
+	"salop",
+	"salops",
+	"salope",
+	"salopes",
 ];
 
 let counterCagnotte = 0;
@@ -173,7 +177,7 @@ bot.on("message", (message) => {
 			embed: {
 				color: 0xbf0707,
 				title: "Total de la tirelire",
-				description: `Le montant de la boîte à gros mots est de ${counterCagnotte}€`,
+				description: `La tirelire de la boîte à gros mots est de ${counterCagnotte}€`,
 				timestamp: new Date(),
 				footer: {
 					text: "InsultoBox",
@@ -193,27 +197,41 @@ bot.on("message", (message) => {
 			},
 		});
 	} else if (message.content === "!stats") {
-		for (const key in newUser) {
+		if (newUser.length) {
+			for (const key in newUser) {
+				message.channel.send({
+					embed: {
+						color: 0xbf0707,
+						thumbnail: {
+							url: `${newUser[key].avatar}`,
+						},
+						fields: [
+							{
+								name: "Pseudo :",
+								value: `${newUser[key].name}`,
+							},
+							{
+								name: "Nombre d'insulte :",
+								value: `${newUser[key].insulte}`,
+							},
+							{
+								name: "Tirelire personnel :",
+								value: `${newUser[key].cagnotte.toFixed(2)}€`,
+							},
+						],
+						timestamp: new Date(),
+						footer: {
+							text: "InsultoBox",
+						},
+					},
+				});
+			}
+		} else {
 			message.channel.send({
 				embed: {
 					color: 0xbf0707,
-					thumbnail: {
-						url: `${newUser[key].avatar}`,
-					},
-					fields: [
-						{
-							name: "Pseudo :",
-							value: `${newUser[key].name}`,
-						},
-						{
-							name: "Nombre d'insulte :",
-							value: `${newUser[key].insulte}`,
-						},
-						{
-							name: "Montant personnel :",
-							value: `${newUser[key].cagnotte.toFixed(2)}€`,
-						},
-					],
+					title: "Statistiques",
+					description: `Aucun personne n'a dit d'insulte pour le moment !`,
 					timestamp: new Date(),
 					footer: {
 						text: "InsultoBox",
@@ -273,5 +291,3 @@ bot.on("message", (message) => {
 		});
 	}
 });
-
-bot.login("");
