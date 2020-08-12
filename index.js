@@ -39,6 +39,7 @@ const insulteArray = [
 	"nique",
 	"enculer",
 	"enculé",
+	"enculed",
 	"enculés",
 	"trou du cul",
 	"trou duc",
@@ -66,6 +67,10 @@ const insulteArray = [
 	"salops",
 	"salope",
 	"salopes",
+	"branle",
+	"branles",
+	"branlette",
+	"branlettes",
 ];
 
 let counterCagnotte = 0;
@@ -84,7 +89,7 @@ bot.on("message", (message) => {
 					{
 						name: "!stats",
 						value:
-							"Affiche les statistiques personnel de chaque personnes qui ont écrit des insultes",
+							"Affiche les statistiques personnel de chaque personne qui ont écrit des insultes",
 					},
 					{
 						name: "!tirelire",
@@ -108,7 +113,7 @@ bot.on("message", (message) => {
 		) {
 			const idUser = message.content.match(/(<@!)$|[0-9]+|(>)$/);
 			const nbInsulte = message.content.match(/(>)^|[0-9]$/);
-			if (idUser[0] && nbInsulte[0]) {
+			if (idUser.length && nbInsulte.length) {
 				if (newUser.length) {
 					let user = newUser.find((result) => result.id === idUser[0]);
 					if (user && user.id === idUser[0]) {
@@ -116,6 +121,18 @@ bot.on("message", (message) => {
 						user.cagnotte += 0.01;
 						counterCagnotte += 0.01;
 						counterInsulte += 1;
+
+						message.channel.send({
+							embed: {
+								color: 0xbf0707,
+								title: "Alerte au gros mots !",
+								description: `**${user.username}** a insulté en vocal ! Et hop +0.01€ ajouté à la boîte à gros mot ! Merci !`,
+								timestamp: new Date(),
+								footer: {
+									text: "InsultoBox",
+								},
+							},
+						});
 					} else {
 						bot.users.fetch(idUser[0]).then((result) => {
 							newUser.push({
@@ -124,6 +141,18 @@ bot.on("message", (message) => {
 								avatar: `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.webp`,
 								insulte: 1,
 								cagnotte: 0.01,
+							});
+
+							message.channel.send({
+								embed: {
+									color: 0xbf0707,
+									title: "Alerte au gros mots !",
+									description: `**${result.username}** a insulté en vocal ! Et hop +0.01€ ajouté à la boîte à gros mot ! Merci !`,
+									timestamp: new Date(),
+									footer: {
+										text: "InsultoBox",
+									},
+								},
 							});
 						});
 					}
@@ -136,6 +165,18 @@ bot.on("message", (message) => {
 								avatar: `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.webp`,
 								insulte: 1,
 								cagnotte: 0.01,
+							});
+
+							message.channel.send({
+								embed: {
+									color: 0xbf0707,
+									title: "Alerte au gros mots !",
+									description: `**${result.username}** a insulté en vocal ! Et hop +0.01€ ajouté à la boîte à gros mot ! Merci !`,
+									timestamp: new Date(),
+									footer: {
+										text: "InsultoBox",
+									},
+								},
 							});
 						});
 					}
@@ -162,7 +203,7 @@ bot.on("message", (message) => {
 		) {
 			const idUser = message.content.match(/(<@!)$|[0-9]+|(>)$/);
 			const nbInsulte = message.content.match(/(>)^|[0-9]$/);
-			if (idUser[0] && nbInsulte[0]) {
+			if (idUser.length && nbInsulte.length) {
 				if (newUser.length) {
 					let user = newUser.find((result) => result.id === idUser[0]);
 					if (user && user.id === idUser[0]) {
@@ -170,8 +211,35 @@ bot.on("message", (message) => {
 						user.cagnotte -= 0.01 * nbInsulte[0];
 						counterCagnotte -= 0.01;
 						counterInsulte -= 1;
+
+						message.channel.send({
+							embed: {
+								color: 0xbf0707,
+								title: "Bénédiction des dieux...",
+								description: `**${user.name}** a été gracié ! -${
+									0.01 * nbInsulte[0]
+								}€ retiré de la boîte à gros mot ! Dommage...`,
+								timestamp: new Date(),
+								footer: {
+									text: "InsultoBox",
+								},
+							},
+						});
 					}
 				}
+			} else {
+				message.channel.send({
+					embed: {
+						color: 0xbf0707,
+						title: "Erreur",
+						description:
+							"Impossible de trouver l'indentifiant et le nombre d'insulte à supprimer",
+						timestamp: new Date(),
+						footer: {
+							text: "InsultoBox",
+						},
+					},
+				});
 			}
 		}
 	} else if (message.content === "!tirelire") {
