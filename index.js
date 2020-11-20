@@ -11,7 +11,7 @@ bot.on("ready", () => {
 		.catch(console.error);
 });
 
-const config = require("./config.json");
+// const config = require("./config.json");
 
 const insulteArray = [
 	"con",
