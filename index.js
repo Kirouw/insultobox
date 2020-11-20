@@ -17,6 +17,12 @@ const insulteArray = [
 	"pd",
 	"fils de pute",
 	"fils de putes",
+	"bouffon",
+	"bouffons",
+	"bouffe",
+	"bouffes",
+	"bouff",
+	"bouf",
 	"fdp",
 	"batar",
 	"batard",
@@ -71,6 +77,8 @@ const insulteArray = [
 	"branles",
 	"branlette",
 	"branlettes",
+	"gueule",
+	"gueules",
 ];
 
 let counterCagnotte = 0;
@@ -121,7 +129,7 @@ bot.on("message", (message) => {
 						user.cagnotte += 0.01;
 						counterCagnotte += 0.01;
 						counterInsulte += 1;
-
+						console.log(counterInsulte);
 						message.channel.send({
 							embed: {
 								color: 0xbf0707,
@@ -135,6 +143,8 @@ bot.on("message", (message) => {
 						});
 					} else {
 						bot.users.fetch(idUser[0]).then((result) => {
+							counterCagnotte += 0.01;
+							counterInsulte += 1;
 							newUser.push({
 								id: result.id,
 								name: result.username,
@@ -158,6 +168,8 @@ bot.on("message", (message) => {
 					}
 				} else {
 					if (!message.author.bot) {
+						counterCagnotte += 0.01;
+						counterInsulte += 1;
 						bot.users.fetch(idUser[0]).then((result) => {
 							newUser.push({
 								id: result.id,
@@ -187,7 +199,7 @@ bot.on("message", (message) => {
 						color: 0xbf0707,
 						title: "Erreur",
 						description:
-							"Impossible de trouver l'indentifiant et le nombre d'insulte à ajouter",
+							"Impossible de trouver l'indentifiant et le nombre d'insulte a ajouter",
 						timestamp: new Date(),
 						footer: {
 							text: "InsultoBox",
@@ -272,14 +284,18 @@ bot.on("message", (message) => {
 				message.channel.send({
 					embed: {
 						color: 0xbf0707,
+						author: {
+							name: `${newUser[key].name}`,
+							icon_url: `${newUser[key].avatar}`,
+						},
 						thumbnail: {
 							url: `${newUser[key].avatar}`,
 						},
 						fields: [
-							{
-								name: "Pseudo :",
-								value: `${newUser[key].name}`,
-							},
+							// {
+							// 	name: "Pseudo :",
+							// 	value: `${newUser[key].name}`,
+							// },
 							{
 								name: "Nombre d'insulte :",
 								value: `${newUser[key].insulte}`,
@@ -361,3 +377,5 @@ bot.on("message", (message) => {
 		});
 	}
 });
+
+bot.login("NzQxOTY5NDk4MzgyNTMyNjg5.Xy_S8Q.XIFEMOh5JZ5AkEyYaRz6fNOPyWA");
