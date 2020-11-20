@@ -116,6 +116,34 @@ bot.on("message", (message) => {
 				},
 			},
 		});
+	} else if (message.content.includes("!clearbot")) {
+		message.channel.messages
+			.fetch({
+				limit: 15, // Change `100` to however many messages you want to fetch
+			})
+			.then((messages) => {
+				const botMessages = [];
+				messages
+					.filter(
+						(m) =>
+							m.author.id === 741969498382532689 ||
+							m.content.includes("!stats") ||
+							m.content.includes("!addinsulte") ||
+							m.content.includes("!clearbot") ||
+							m.content.includes("!helpinsulte") ||
+							m.content.includes("!removeinsulte") ||
+							m.content.includes("!tirelire") ||
+							m.content.includes("!insulte")
+					)
+					.forEach((msg) => botMessages.push(msg));
+				message.channel.bulkDelete(botMessages).then(() => {
+					message.channel.send("Message InsultoBox supprimé").then((msg) =>
+						msg.delete({
+							timeout: 3000,
+						})
+					);
+				});
+			});
 	} else if (message.content.includes("!addinsulte")) {
 		if (
 			message.author.id === "267763097215696896" ||
