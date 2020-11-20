@@ -135,7 +135,11 @@ bot.on("message", (message) => {
 							embed: {
 								color: 0xbf0707,
 								title: "Alerte au gros mots !",
-								description: `**${user.username}** a insulté en vocal ! Et hop +0.01€ ajouté à la boîte à gros mot ! Merci !`,
+								description: `**${
+									user.username
+								}** a insulté en vocal ! Et hop +${
+									0.01 * nbInsulte[0]
+								}€ ajouté à la boîte à gros mot ! Merci !`,
 								timestamp: new Date(),
 								footer: {
 									text: "InsultoBox",
@@ -158,7 +162,11 @@ bot.on("message", (message) => {
 								embed: {
 									color: 0xbf0707,
 									title: "Alerte au gros mots !",
-									description: `**${result.username}** a insulté en vocal ! Et hop +0.01€ ajouté à la boîte à gros mot ! Merci !`,
+									description: `**${
+										result.username
+									}** a insulté en vocal ! Et hop +${
+										0.01 * nbInsulte[0]
+									}€ ajouté à la boîte à gros mot ! Merci !`,
 									timestamp: new Date(),
 									footer: {
 										text: "InsultoBox",
@@ -169,22 +177,22 @@ bot.on("message", (message) => {
 					}
 				} else {
 					if (!message.author.bot) {
-						counterCagnotte += 0.01;
-						counterInsulte += 1;
+						counterCagnotte += 0.01 * nbInsulte[0];
+						counterInsulte += 1 * nbInsulte[0];
 						bot.users.fetch(idUser[0]).then((result) => {
 							newUser.push({
 								id: result.id,
 								name: result.username,
 								avatar: `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.webp`,
-								insulte: 1,
-								cagnotte: 0.01,
+								insulte: 1 * nbInsulte[0],
+								cagnotte: 0.01 * nbInsulte[0],
 							});
 
 							message.channel.send({
 								embed: {
 									color: 0xbf0707,
 									title: "Alerte au gros mots !",
-									description: `**${result.username}** a insulté en vocal ! Et hop +0.01€ ajouté à la boîte à gros mot ! Merci !`,
+									description: `**${result.username}** a insulté en vocal ! Et hop +${counterCagnotte}€ ajouté à la boîte à gros mot ! Merci !`,
 									timestamp: new Date(),
 									footer: {
 										text: "InsultoBox",
