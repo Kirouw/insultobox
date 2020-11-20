@@ -11,6 +11,8 @@ bot.on("ready", () => {
 		.catch(console.error);
 });
 
+const config = require("./config.json");
+
 const insulteArray = [
 	"con",
 	"connard",
@@ -378,4 +380,4 @@ bot.on("message", (message) => {
 	}
 });
 
-bot.login("NzQxOTY5NDk4MzgyNTMyNjg5.Xy_S8Q.XIFEMOh5JZ5AkEyYaRz6fNOPyWA");
+bot.login(config.token);
