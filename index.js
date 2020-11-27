@@ -99,11 +99,11 @@ bot.on("message", (message) => {
 					{
 						name: "!stats",
 						value:
-							"Affiche les statistiques personnel de chaque personne qui ont écrit des insultes",
+							"Affiche les statistiques personnelles de chaque personne qui ont écrit des insultes",
 					},
 					{
 						name: "!tirelire",
-						value: "Affiche le total de la tirelire dans la boîte à gros mots",
+						value: "Affiche le total de la tirelire de la boîte à gros mots",
 					},
 					{
 						name: "!insulte",
@@ -338,7 +338,7 @@ bot.on("message", (message) => {
 								value: `${newUser[key].insulte}`,
 							},
 							{
-								name: "Tirelire personnel :",
+								name: "Tirelire personnelle :",
 								value: `${newUser[key].cagnotte.toFixed(2)}€`,
 							},
 						],
@@ -354,7 +354,7 @@ bot.on("message", (message) => {
 				embed: {
 					color: 0xbf0707,
 					title: "Statistiques",
-					description: `Aucun personne n'a dit d'insulte pour le moment !`,
+					description: `Aucune personne n'a dit d'insulte pour le moment !`,
 					timestamp: new Date(),
 					footer: {
 						text: "InsultoBox",
