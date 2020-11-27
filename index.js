@@ -155,10 +155,10 @@ bot.on("message", (message) => {
 				if (newUser.length) {
 					let user = newUser.find((result) => result.id === idUser[0]);
 					if (user && user.id === idUser[0]) {
-						user.insulte += 1 * tonumber(nbInsulte[0]);
-						user.cagnotte += 0.01 * tonumber(nbInsulte[0]);
-						counterCagnotte += 0.01 * tonumber(nbInsulte[0]);
-						counterInsulte += 1 * tonumber(nbInsulte[0]);
+						user.insulte += 1 * parseInt(nbInsulte[0]);
+						user.cagnotte += 0.01 * parseInt(nbInsulte[0]);
+						counterCagnotte += 0.01 * parseInt(nbInsulte[0]);
+						counterInsulte += 1 * parseInt(nbInsulte[0]);
 						message.channel.send({
 							embed: {
 								color: 0xbf0707,
@@ -176,14 +176,14 @@ bot.on("message", (message) => {
 						});
 					} else {
 						bot.users.fetch(idUser[0]).then((result) => {
-							counterCagnotte += 0.01 * tonumber(nbInsulte[0]);
-							counterInsulte += 1 * tonumber(nbInsulte[0]);
+							counterCagnotte += 0.01 * parseInt(nbInsulte[0]);
+							counterInsulte += 1 * parseInt(nbInsulte[0]);
 							newUser.push({
 								id: result.id,
 								name: result.username,
 								avatar: `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.webp`,
-								insulte: 1 * tonumber(nbInsulte),
-								cagnotte: 0.01 * tonumber(nbInsulte),
+								insulte: 1 * parseInt(nbInsulte),
+								cagnotte: 0.01 * parseInt(nbInsulte),
 							});
 
 							message.channel.send({
@@ -205,15 +205,15 @@ bot.on("message", (message) => {
 					}
 				} else {
 					if (!message.author.bot) {
-						counterCagnotte += 0.01 * tonumber(nbInsulte[0]);
-						counterInsulte += 1 * tonumber(nbInsulte[0]);
+						counterCagnotte += 0.01 * parseInt(nbInsulte[0]);
+						counterInsulte += 1 * parseInt(nbInsulte[0]);
 						bot.users.fetch(idUser[0]).then((result) => {
 							newUser.push({
 								id: result.id,
 								name: result.username,
 								avatar: `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.webp`,
-								insulte: 1 * tonumber(nbInsulte[0]),
-								cagnotte: 0.01 * tonumber(nbInsulte[0]),
+								insulte: 1 * parseInt(nbInsulte[0]),
+								cagnotte: 0.01 * parseInt(nbInsulte[0]),
 							});
 
 							message.channel.send({
@@ -256,10 +256,10 @@ bot.on("message", (message) => {
 				if (newUser.length) {
 					let user = newUser.find((result) => result.id === idUser[0]);
 					if (user && user.id === idUser[0]) {
-						user.insulte -= tonumber(nbInsulte[0]);
-						user.cagnotte -= 0.01 * tonumber(nbInsulte[0]);
-						counterCagnotte -= 0.01 * tonumber(nbInsulte[0]);
-						counterInsulte -= 1 * tonumber(nbInsulte[0]);
+						user.insulte -= parseInt(nbInsulte[0]);
+						user.cagnotte -= 0.01 * parseInt(nbInsulte[0]);
+						counterCagnotte -= 0.01 * parseInt(nbInsulte[0]);
+						counterInsulte -= 1 * parseInt(nbInsulte[0]);
 
 						message.channel.send({
 							embed: {
