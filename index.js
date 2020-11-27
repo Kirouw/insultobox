@@ -205,8 +205,8 @@ bot.on("message", (message) => {
 					}
 				} else {
 					if (!message.author.bot) {
-						counterCagnotte += 0.01 * nbInsulte[0];
-						counterInsulte += 1 * nbInsulte[0];
+						counterCagnotte += 0.01 * tonumber(nbInsulte[0]);
+						counterInsulte += 1 * tonumber(nbInsulte[0]);
 						bot.users.fetch(idUser[0]).then((result) => {
 							newUser.push({
 								id: result.id,
